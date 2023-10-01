@@ -7,7 +7,12 @@
     "build": "remix build",
     "dev": "remix dev --manual",
     "start": "remix-serve ./build/index.js",
+    "format": "prettier --write .",
     "typecheck": "tsc"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "jsxSingleQuote": true
   },
   "dependencies": {
     "@remix-run/css-bundle": "^2.0.1",
@@ -24,6 +29,9 @@
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "eslint": "^8.38.0",
+    "eslint-config-prettier": "^9.0.0",
+    "postcss": "^8.4.31",
+    "prettier": "^3.0.3",
     "typescript": "^5.1.6"
   },
   "engines": {

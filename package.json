@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "rss",
   "private": true,
   "sideEffects": false,
   "type": "module",
@@ -15,10 +15,13 @@
     "jsxSingleQuote": true
   },
   "dependencies": {
+    "@mantine/core": "^7.1.0",
+    "@mantine/hooks": "^7.1.0",
     "@remix-run/css-bundle": "^2.0.1",
     "@remix-run/node": "^2.0.1",
     "@remix-run/react": "^2.0.1",
     "@remix-run/serve": "^2.0.1",
+    "@tabler/icons-react": "^2.38.0",
     "isbot": "^3.6.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
@@ -31,6 +34,8 @@
     "eslint": "^8.38.0",
     "eslint-config-prettier": "^9.0.0",
     "postcss": "^8.4.31",
+    "postcss-preset-mantine": "^1.7.0",
+    "postcss-simple-vars": "^7.0.1",
     "prettier": "^3.0.3",
     "typescript": "^5.1.6"
   },

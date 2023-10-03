@@ -1,6 +1,6 @@
 import { AppShell, Group, Burger, Title, List, ThemeIcon } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { useLoaderData, Link } from '@remix-run/react';
+import { useLoaderData, Link, Outlet } from '@remix-run/react';
 import { IconCircleCheck, IconCircleDashed } from '@tabler/icons-react';
 import { getItem, getTopStories } from '~/utils/hackerNews.server';
 
@@ -28,8 +28,8 @@ export const loader = async () => {
 
 // /top のURLで表示するページのコンポーネント
 export default function TopRoute() {
-  // (2) loaderで取得済みのデータを取り出す
-  const data = useLoaderData<Summary[]>();
+  // loaderで取得済みのデータを取り出す
+  const data = useLoaderData<typeof loader>();
   const [opened, { toggle }] = useDisclosure();
 
   return (
@@ -70,7 +70,9 @@ export default function TopRoute() {
           ))}
         </List>
       </AppShell.Navbar>
-      <AppShell.Main>Main</AppShell.Main>
+      <AppShell.Main>
+        <Outlet />
+      </AppShell.Main>
     </AppShell>
   );
 }

@@ -4,11 +4,6 @@ import { useLoaderData, Link, Outlet } from '@remix-run/react';
 import { IconCircleCheck, IconCircleDashed } from '@tabler/icons-react';
 import { getItem, getTopStories } from '~/utils/hackerNews.server';
 
-type Summary = {
-  id: string;
-  title: string;
-};
-
 // サーバーサイドでデータを取得する
 export const loader = async () => {
   // 500件のデータを取得する
@@ -16,7 +11,7 @@ export const loader = async () => {
   // 上位20件のIDだけに絞り込む
   const topIds = top500Ids.slice(0, 20);
   // 上位20件の記事データを取得する
-  const top: Summary[] = await Promise.all(topIds.map((id) => getItem(id)));
+  const top = await Promise.all(topIds.map((id) => getItem(id)));
   // 記事データのIDとタイトルだけに絞り込む
   const topSummary = top.map((item) => ({
     id: item.id,

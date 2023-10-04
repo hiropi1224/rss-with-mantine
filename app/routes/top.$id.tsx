@@ -5,23 +5,35 @@ import { getItem } from '~/utils/hackerNews.server';
 // paramsの値を使ってデータを取得する
 export const loader = async ({ params }: { params: { id: string } }) => {
   const item = await getItem(params.id);
-  return json({ item });
+
+  const kidsItems = await Promise.all(
+    item.kids.map((kidsItemId) => getItem(String(kidsItemId))),
+  );
+
+  return json({ item, kids: kidsItems });
 };
 
 export default function Item() {
-  const { item } = useLoaderData<typeof loader>();
+  const { item, kids } = useLoaderData<typeof loader>();
 
   return (
-    <div id='article'>
-      <h1>Article</h1>
-      <p>{item.id}</p>
-      <p>{item.title}</p>
+    <article>
+      <h1>{item.title}</h1>
       <p>
         by {item.by} on {new Date(item.time * 1000).toLocaleString()}
       </p>
       <p>
         <a href={item.url}>{item.url}</a>
       </p>
-    </div>
+      <h2>Comments</h2>
+      {kids.map((kidsItem) => (
+        <div key={kidsItem.id}>
+          <h3>by: {kidsItem.by}</h3>
+          <p>{kidsItem.text}</p>
+          <p>{new Date(kidsItem.time * 1000).toLocaleString()}</p>
+          <hr />
+        </div>
+      ))}
+    </article>
   );
 }

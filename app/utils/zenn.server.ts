@@ -39,8 +39,15 @@ async function fetchFeedItems(url: string) {
 }
 
 /** Zennの記事を取得する */
-export async function getZennItem(): Promise<FeedItem[]> {
-  const items = await fetchFeedItems(`https://zenn.dev/topics/react/feed`);
+export async function getZennItem(topic: string): Promise<FeedItem[]> {
+  const items = await fetchFeedItems(`https://zenn.dev/topics/${topic}/feed`);
+
+  return items;
+}
+
+/** Userの記事を取得する */
+export async function getZennUserItem(user: string): Promise<FeedItem[]> {
+  const items = await fetchFeedItems(`https://zenn.dev/${user}/feed`);
 
   return items;
 }
